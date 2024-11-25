@@ -1,0 +1,6 @@
+﻿  main.c
+D:\с\Labs\Laba05\main.c(66,8): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\с\Labs\Laba05\main.c(135,8): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\с\Labs\Laba05\main.c(241,18): warning C4022: free: несоответствие указателя для фактического параметра 1
+D:\с\Labs\Laba05\main.c(255,8): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Laba05.vcxproj -> D:\с\Labs\Laba05\x64\Debug\Laba05.exe

@@ -1,0 +1,5 @@
+﻿  main.c
+D:\с\Labs\Laba6\main.c(80,8): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\с\Labs\Laba6\main.c(149,8): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\с\Labs\Laba6\main.c(147,6): warning C4101: k: неиспользованная локальная переменная
+  Laba6.vcxproj -> D:\с\Labs\Laba6\x64\Debug\Laba6.exe

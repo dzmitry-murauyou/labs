@@ -1,0 +1,3 @@
+﻿  main.c
+D:\с\Labs\Laba7\main.c(83,2): warning C4013: gets: нет определения; предполагается "extern" с возвратом типа "int"
+  Laba7.vcxproj -> D:\с\Labs\Laba7\x64\Debug\Laba7.exe

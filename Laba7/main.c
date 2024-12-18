@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <locale.h>
 
-
 const int UPPER_INPUT = 100;
 int inputCheck(char* value, int LIMIT)
 {
@@ -75,49 +74,47 @@ void check1(char* string)
 	}
 void task1()
 {
-
-	char* string;
 	int isCorrect = 0,i=0;
-	string = (char*)malloc(sizeof(char) * 100);
-	printf_s("Enter the string\n");
-	gets(string);
-	check1(string);
-	printf_s("The string is\n");
-	printf("%s\n", string);
-
-}
-int string_length(char* str) 
-{
+	char* dynamicString = NULL;
 	int length = 0;
-	while (str[length] != '\0') 
-	{
-		length++;
+	int ch;
+	printf_s("Enter the string\n");
+	while ((ch = getchar()) != '\n') {
+		char* temp = realloc(dynamicString, (length + 1) * sizeof(char));
+		if (temp == NULL) {
+			return;
+		}
+		dynamicString = temp;
+		dynamicString[length++] = (char)ch;
 	}
-	return length;
+	dynamicString[length] = '\0';
+	check1(dynamicString);
+	printf_s("The string is\n");
+	printf("%s\n", dynamicString);
 }
-void MyStrcat(char* s1, char* s2, int n1, int n2, char* result)
+void MyStrcat(char* s1, char* s2, int n1, int n2, char* result, int len)
 {
 	int i = 0, j = 0;
 	for (i = 0; i < n1; i++)
 	{
 		result[i] = s1[i];
 	}
-	j = string_length(s2) - n2;
+	j = len - n2;
 	for (; i < n1+n2; i++)
 	{
 		result[i] = s2[j];
 		j++;
 	}
+	result[n1+n2] = '\0';
 	printf_s("%s\n", result);
 }
 void task2()
 {
-	int n1=0, n2=0;
-	char* s1;
-	char* s2;
+	int n1=0, n2=0,ch;
+	char* s1=NULL;
+	char* s2=NULL;
+	int length = 0;
 	char* result;
-	s1 = (char*)malloc(sizeof(char) * 100);
-	s2 = (char*)malloc(sizeof(char) * 100);
 	while (n1 < 1)
 	{
 		printf_s("Enter the number of characters from 1 line(it is possible with the leading zeros and the + sign)\n");
@@ -139,31 +136,52 @@ void task2()
 	while (1)
 	{
 		printf_s("Enter 1 line\n");
-		gets(s1);
-		if (string_length(s1) >= n1)
+		while ((ch = getchar()) != '\n') {
+			char* temp = realloc(s1, (length + 1) * sizeof(char));
+			if (temp == NULL) {
+				return;
+			}
+			s1 = temp;
+			s1[length++] = (char)ch;
+		}
+		s1[length] = '\0';
+
+		if (length >= n1)
 		{
 			break;
 		}
 		else
 		{
 			printf_s("Please, again\n");
+			length = 0;
 		}
 	}
+	length = 0;
 	while (1)
 	{
 		printf_s("Enter 2 line\n");
-		gets(s2);
-		if (string_length(s2) >= n2)
+		while ((ch = getchar()) != '\n') 
+		{
+			char* temp = realloc(s2, (length + 1) * sizeof(char));
+			if (temp == NULL) {
+				return;
+			}
+			s2 = temp;
+			s2[length++] = (char)ch;
+		}
+		s2[length] = '\0';
+		if (length >= n1)
 		{
 			break;
 		}
 		else
 		{
 			printf_s("Please, again\n");
+			length = 0;
 		}
 	}
-	result = (char*)malloc(sizeof(char) * (n1+n2)/2);
-	MyStrcat(s1, s2, n1, n2, result);
+	result = (char*)calloc(sizeof(char), (n1+n2)+1);
+	MyStrcat(s1, s2, n1, n2, result, length);
 }
 void swap(int* a, int* b) {
 	int temp = *a;
@@ -213,11 +231,13 @@ void task3()
 {
 	int numberOfStrings = 0, i = 0, j = 0;
 	char** arrayOfString = NULL;
-	arrayOfString = (char**)calloc(numberOfStrings, sizeof(char*));
 	int* arrayOfMaxWordLen = NULL;
 	int* arrayOfMaxWordLen2 = NULL;
 	arrayOfMaxWordLen = (int*)calloc(numberOfStrings + 1, sizeof(int));
 	arrayOfMaxWordLen2 = (int*)calloc(numberOfStrings + 1, sizeof(int));
+	char* dynamicString = NULL;
+	int length = 0;
+	int ch;
 	while (numberOfStrings < 1)
 	{
 		printf_s("Enter the number of strings\n");
@@ -227,17 +247,19 @@ void task3()
 			printf_s("Please, again\n");
 		}
 	}
+	arrayOfString = (char**)calloc(numberOfStrings, sizeof(char*));
 	for (i = 0; i < numberOfStrings; i++) {
-		arrayOfString[i] = (char*)malloc(100 * sizeof(char));
+		while ((ch = getchar()) != '\n') {
+			char* temp = realloc(arrayOfString[i], (length + 1) * sizeof(char));
+			if (temp == NULL) {
+				return;
+			}
+			arrayOfString[i] = temp;
+			arrayOfString[i][length++] = (char)ch;
+		}
+		arrayOfString[i][length] = '\0';
+		length=0;
 	}
-	for (i = 0; i < numberOfStrings; i++)
-	{
-		printf_s("Enter the string number %d:\n", i + 1);
-		gets(arrayOfString[i]);
-		printf("\n");
-	}
-
-
 	for (i = 0; i < numberOfStrings; i++)
 	{
 		arrayOfMaxWordLen[i] = maxWordLength(arrayOfString[i]);

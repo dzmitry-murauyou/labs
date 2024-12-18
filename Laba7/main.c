@@ -229,15 +229,13 @@ int maxWordLength(char* str) {
 }
 void task3()
 {
-	int numberOfStrings = 0, i = 0, j = 0;
+	int numberOfStrings = 0, i = 0, j = 0,ch ;
 	char** arrayOfString = NULL;
 	int* arrayOfMaxWordLen = NULL;
 	int* arrayOfMaxWordLen2 = NULL;
 	arrayOfMaxWordLen = (int*)calloc(numberOfStrings + 1, sizeof(int));
 	arrayOfMaxWordLen2 = (int*)calloc(numberOfStrings + 1, sizeof(int));
-	char* dynamicString = NULL;
 	int length = 0;
-	int ch;
 	while (numberOfStrings < 1)
 	{
 		printf_s("Enter the number of strings\n");
